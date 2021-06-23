@@ -1,0 +1,57 @@
+version: "3.7"
+
+networks:
+  laravel-network:
+    driver: bridge
+
+services:
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nginx
+    restart: unless-stopped
+    networks:
+      - laravel-network
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ../app:/var/www/app
+      - ../nginx/conf:/etc/nginx/conf.d
+      - ../nginx/log:/var/log/nginx
+    working_dir: /var/log/nginx
+    depends_on:
+      - laravel
+      - mysql
+
+  laravel:
+    build:
+      context: .
+      dockerfile: laravel.Dockerfile
+    container_name: laravel
+    restart: unless-stopped
+    networks:
+      - laravel-network
+    ports:
+      - 9000:9000
+    volumes:
+      - ../app:/var/www/app
+    working_dir: /var/www/app
+
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    restart: unless-stopped
+    networks:
+      - laravel-network
+    ports:
+      - 3306:3306
+    volumes:
+      - ../mysql:/var/lib/mysql
+    working_dir: /var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Please set mysql root password!}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:?Please set mysql database name!}
+      MYSQL_USER: ${MYSQL_USER:?Please set mysql user name!}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Please set mysql user password!}
+      SERVICE_TAGS: ${SERVICE_TAGS:?Please set mysql service tag! default - dev}
+      SERVICE_NAME: ${SERVICE_NAME:?Please set mysql service name! default - mysql}
