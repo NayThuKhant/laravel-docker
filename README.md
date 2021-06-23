@@ -4,6 +4,10 @@
   ```console
   cd laravel-docker
    ```
+- Make directory with the name of 'app'
+     ```console
+   mkdir app
+   ```
 - COPY all from laravel project into /app
    ```console
    cp -a LARAVEL_PROJECT/. app
