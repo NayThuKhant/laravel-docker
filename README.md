@@ -31,7 +31,7 @@
   DB_DATABASE=        #docker/.env MYSQL_DATABASE default-app
   DB_USERNAME=        #docker/.env MYSQL_USER default-laravel
   DB_PASSWORD=secret  #docker/.env MYSQL_PASSWORD default-secret
- ```
+  ```
 
   
 
