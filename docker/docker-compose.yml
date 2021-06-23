@@ -44,7 +44,7 @@ services:
     networks:
       - laravel-network
     ports:
-      - 3306: ${MYSQL_PORT:?Please set mysql port!}
+      - 3306:${MYSQL_PORT:?Please set mysql port!}
     volumes:
       - ../mysql:/var/lib/mysql
     working_dir: /var/lib/mysql
