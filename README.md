@@ -4,9 +4,9 @@
   ```console
   cd laravel-docker
    ```
-- Make directory with the name of 'app'
+- Clone laravel project into ***app***
      ```console
-   mkdir app
+   git clone LARAVEL_PROJECT app
    ```
 - COPY all from laravel project into /app
    ```console
@@ -21,6 +21,19 @@
    ```console
     docker-compose up -d --build
     ```
+
+- Laravel Mysql Credentials
+  ```console
+  
+  DB_CONNECTION=mysql
+  DB_HOST             #docker/.env MYSQL_DATABASE default-mysql
+  DB_PORT             #docker/.env MYSQL_PORT default-3306
+  DB_DATABASE=        #docker/.env MYSQL_DATABASE default-app
+  DB_USERNAME=        #docker/.env MYSQL_USER default-laravel
+  DB_PASSWORD=secret  #docker/.env MYSQL_PASSWORD default-secret
+ ```
+
+  
 
 
 
